@@ -1,51 +1,47 @@
 {
-  "compilerOptions": {
-    "target": "ES2018",
-    "module": "commonjs",
-    "lib": ["ES2018", "DOM"],
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "outDir": "./dist/src",
-    "removeComments": true,
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "types": ["node"],
-    "traceResolution": false,
-    "resolveJsonModule": true,
-    "paths": {
-      "@app/*": ["src/apps/api/*"],
-      "@models/*": ["src/models/*"],
-      "@service/*": ["src/service/*"],
-      "@src/*": ["src/*"],
-      "@context": ["src/context"]
+    "compilerOptions": {
+        "target": "ES2018",
+        "module": "commonjs",
+        "lib": ["ES2018", "DOM"],
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "outDir": "./dist/src",
+        "removeComments": true,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "types": ["node"],
+        "traceResolution": false,
+        "resolveJsonModule": true,
+        "paths": {
+            "@app/*": ["src/apps/api/*"],
+            "@models/*": ["src/models/*"],
+            "@service/*": ["src/service/*"],
+            "@src/*": ["src/*"],
+            "@context": ["src/context"]
+        },
+        "noUnusedLocals": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": true
     },
-    "noUnusedLocals": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": [
-    "script/**/*",
-    "src/**/*",
-    "typings"
-  ],
-  "exclude": [
-    "src/**/*.test.*",
-    "src/**/*.spec.*",
-    "tests",
-    "test/**/*",
-    "test_reports",
-    "autobot_json",
-    "migration",
-    "jest.config.js",
-    "paths.js",
-    "dist"
-  ]
+    "include": ["script/**/*", "src/**/*", "typings"],
+    "exclude": [
+        "src/**/*.test.*",
+        "src/**/*.spec.*",
+        "tests",
+        "test/**/*",
+        "test_reports",
+        "autobot_json",
+        "migration",
+        "jest.config.js",
+        "paths.js",
+        "dist"
+    ]
 }
