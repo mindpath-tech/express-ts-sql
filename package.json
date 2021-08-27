@@ -6,6 +6,7 @@
     "main": "dist/src/index.js",
     "types": "dist/src/index.d.ts",
     "scripts": {
+        "prepare": "git config core.hooksPath ./git-hooks",
         "build": "tsc --build ./tsconfig.json",
         "prebuild": "rm -rf ./dist",
         "start": "NODE_ENV=production TS_NODE_PROJECT=./tsconfig.json  NODE_EXTRA_CA_CERTS=./src/service/proxy/certs/all.pem  node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/index",
