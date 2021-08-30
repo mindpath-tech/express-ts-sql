@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "Branch-Naming-Conventions hooks......."
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+BRANCH_REGEX="^(develop|master|((feature|hotfix)\/.+))$"
+
+if [[ ! $BRANCH_NAME =~ $BRANCH_REGEX ]]
+then
+  echo "Your commit was rejected due to branching name"
+  echo "Please rename your branch is '$BRANCH_NAME'"
+  echo "Your branch name can be 'master' or 'develop' or 'feature/your-task-name' or 'hotfix/your-task-name'"
+  exit 1
+fi
+
+echo "✔ Branch-Naming-Conventions hooks"
