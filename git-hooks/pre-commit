@@ -2,6 +2,23 @@
 
 echo "Pre-Commit hooks ......."
 
-. "$(dirname "$0")/branch-naming-conventions"
+yarn lint:fix
+yarn format
+yarn build
+
+echo "Branch-Naming-Conventions hooks......."
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+BRANCH_REGEX="^(develop|master((feature|hotfix|fix)\/.+))$"
+
+if [[ ! $BRANCH_NAME =~ $BRANCH_REGEX ]]
+then
+  echo "Rejected due to branching name."
+  echo "Please rename '$BRANCH_NAME' branch."
+  echo "Branch can be 'master' or 'develop' or 'feature/your-branch-name' or 'hotfix/your-branch-name' or 'fix/your-branch-name'"
+  exit 1
+fi
+
+echo "✔ Branch-Naming-Conventions hooks"
 
 echo "✔ Pre-Commit hooks"
