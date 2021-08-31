@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "Pre-Commit hooks ......."
+
+yarn lint:fix
+yarn format
+yarn build
+
+
+. "$(dirname "$0")/branch-naming-conventions"
+
+echo "✔ Pre-Commit hooks"
+
