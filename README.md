@@ -7,9 +7,6 @@
 ### Dependencies
 **@mindpath/logger**: https://www.npmjs.com/package/@mindpath/logger
 
-### Description
-Custom logging moudle to print logs on console, file or sent it to logs visualization application such as grafana.
-
 ### Set following env to your code.
 ```sh
 LOG_LEVEL='debug'
@@ -27,37 +24,6 @@ verbose: 4,
 debug: 5,
 silly: 6
 ```
-
-### Log Providers.
-This module currently support following providers. You can use any combination of below providers.
-
- - **console**: Pass if you need logs to be print on console.
- - **grafana**: Pass if you want to sent logs to grafana using loki transport. Grafana url is
-   needed for this. 
-
-Some of the Log providers needs there configuration properties as well.  
-Follow below steps to set Log Providers in environment variable. 
-
- 1. Form a json contain array of objects.
- ```js
-[{"name": "console"},{"name": "grafana","url": "https://example.com"}]
- ```
- 2. Use JSON as string in environment variable for property LOGS_PROVIDERS.
-  ```json
-'[{"name": "console"},{"name": "grafana","url": "https://example.com"}]'
- ```
-
- ### Usage
-
- ```ts
-  import logger from '@mindpath/logger';
-
-  logger.error('Print error message');
-  logger.info('Print info message');
-
-  // You can use all the levels defined in Log Levels
-
- ```
 
 ## Contributors
 
