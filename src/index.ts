@@ -3,6 +3,7 @@ import cors from 'cors';
 import HttpStatus from 'http-status-codes';
 import { config } from 'dotenv';
 config();
+import logger from '@mindpath/logger';
 
 const app = express();
 
@@ -20,12 +21,12 @@ app.get('*', function (req: Request, res: Response, next: NextFunction) {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.info(`Started on port : ${PORT}`);
+  logger.info(`Started on port : ${PORT}`);
 });
 
 // error handler middleware
 app.use(function (err: Error, req: Request, res: Response) {
-  console.log(`Something went wrong ${err.message}`);
+  logger.error(`Something went wrong ${err.message}`);
   return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     message: err.message,
