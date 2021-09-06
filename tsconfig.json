@@ -21,8 +21,8 @@
         "resolveJsonModule": true,
         "paths": {
             "@app/*": ["src/apps/api/*"],
-            "@models/*": ["src/models/*"],
-            "@service/*": ["src/service/*"],
+            "@models/*": ["src/database/models/*"],
+            "@service/*": ["src/services/*"],
             "@src/*": ["src/*"],
             "@context": ["src/context"]
         },
@@ -31,7 +31,7 @@
         "noImplicitReturns": true,
         "forceConsistentCasingInFileNames": true
     },
-    "include": ["script/**/*", "src/**/*", "typings"],
+    "include": ["script/**/*", "src/**/*", "typings", "config"],
     "exclude": [
         "src/**/*.test.*",
         "src/**/*.spec.*",
