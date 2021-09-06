@@ -1,8 +1,7 @@
-import express, { Request, Response, NextFunction } from 'express';
+import { serverConfig } from '../config';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import HttpStatus from 'http-status-codes';
-import { config } from 'dotenv';
-config();
 import logger from '@mindpath/logger';
 
 const app = express();
@@ -14,14 +13,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(useragent.express());
 
-app.get('*', function (req: Request, res: Response, next: NextFunction) {
+app.get('*', function (req: Request, res: Response) {
   return res.status(404).send({ message: 'APIs route not found' });
 });
 
-const PORT = process.env.PORT || 3000;
+const port = serverConfig.port;
 
-app.listen(PORT, () => {
-  logger.info(`Started on port : ${PORT}`);
+app.listen(port, () => {
+  console.info(`Started on port : ${port}`);
 });
 
 // error handler middleware
