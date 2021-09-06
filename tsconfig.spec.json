@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.build",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "types": ["node", "jest"],
+    "allowJs": true,
+    "noUnusedLocals": false
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "test/**/*.ts"
+  ],
+  "exclude": [
+    "test_reports/**/*"
+  ]
+}
