@@ -13,14 +13,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(useragent.express());
 
-app.get('*', function (req: Request, res: Response) {
-  return res.status(404).send({ message: 'APIs route not found' });
+const port = serverConfig.port;
+app.get('/health', function (req, res) {
+  res.status(200).send('ok');
 });
 
-const port = serverConfig.port;
-
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.info(`Started on port : ${port}`);
+});
+
+app.get('*', function (req: Request, res: Response) {
+  return res.status(404).send({ message: 'APIs route not found' });
 });
 
 // error handler middleware
@@ -32,3 +35,5 @@ app.use(function (err: Error, req: Request, res: Response) {
     body: {},
   });
 });
+
+module.exports = server;
