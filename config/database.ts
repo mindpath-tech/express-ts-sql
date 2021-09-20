@@ -1,10 +1,11 @@
 import { Dialect, Sequelize } from 'sequelize';
+import { serverConfig } from "./common";
 
-const dbName = process.env.DB_NAME as string;
-const dbUser = process.env.DB_USER as string;
-const dbHost = process.env.DB_HOST;
-const dbDriver = process.env.DB_DRIVER as Dialect;
-const dbPassword = process.env.DB_PASSWORD;
+const dbName = serverConfig.db_name;
+const dbUser = serverConfig.db_user;
+const dbHost = serverConfig.db_host;
+const dbDriver = serverConfig.db_driver as Dialect;
+const dbPassword = serverConfig.db_password;
 const MAX_CONNECTION = 5;
 
 const sequelizeConnection = new Sequelize(dbName, dbUser, dbPassword, {
