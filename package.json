@@ -20,7 +20,8 @@
         "lint:fix": "eslint . --ext .ts --fix",
         "format": "prettier --write src/**/*.ts",
         "db:migrate": "yarn run build  && ./script/migrate.sh",
-        "db:seed": "yarn run build  && ./script/seed.sh"
+        "db:seed": "yarn run build  && ./script/seed.sh",
+        "db:create": "sequelize-cli db:create"
     },
     "author": "MindPath – Intelligent Solutions <engineering@mindpathtech.com>",
     "homepage": "",
