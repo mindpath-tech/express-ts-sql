@@ -1,8 +1,10 @@
 import { serverConfig } from '../config';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import HttpStatus from 'http-status-codes';
-import logger from '@mindpath/logger';
+import path from 'path';
+import fs from 'fs';
+import RequestContext from './helpers/context';
+import ResponseHandler from './helpers/responseHandler';
 
 const app = express();
 
@@ -14,8 +16,33 @@ app.use(express.urlencoded({ extended: true }));
 //app.use(useragent.express());
 
 const port = serverConfig.port;
-app.get('/health', function (req, res) {
-  res.status(200).send('ok');
+
+// Middleware to initialize request context
+app.use((req: Request, res: Response, next: NextFunction) => {
+  req.context = new RequestContext(req);
+  next();
+});
+
+app.get('/health', function (req: Request, res: Response) {
+  req.context.logInfo({
+    message: 'Health check completed',
+    source: 'heath',
+    action: 'healthcheck',
+  });
+  const response = new ResponseHandler(req, res);
+  return response.successResponse('okay');
+});
+
+/**
+ * ----------------------------- Start of V1 APIs ------------------------
+ */
+fs.readdirSync(path.resolve(__dirname, 'routes', 'v1')).forEach((file) => {
+  if (!file.includes('.js.') && !file.includes('.ts.') && !file.includes('.d.ts')) {
+    console.log(file);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { router, basePath } = require(`./routes/v1/${file}`);
+    app.use(basePath, router);
+  }
 });
 
 const server = app.listen(port, () => {
@@ -23,17 +50,14 @@ const server = app.listen(port, () => {
 });
 
 app.get('*', function (req: Request, res: Response) {
-  return res.status(404).send({ message: 'APIs route not found' });
+  const response = new ResponseHandler(req, res);
+  return response.notFoundError('APIs route not found', 'RequestNotFound');
 });
 
 // error handler middleware
 app.use(function (err: Error, req: Request, res: Response) {
-  logger.error(`Something went wrong ${err.message}`);
-  return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
-    status: HttpStatus.INTERNAL_SERVER_ERROR,
-    message: err.message,
-    body: {},
-  });
+  const response = new ResponseHandler(req, res);
+  return response.serverError(err.message, 'InternalServerError', err.stack);
 });
 
 module.exports = server;

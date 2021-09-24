@@ -1,4 +1,4 @@
-import { QueryInterface, DataTypes } from "sequelize";
+import { QueryInterface, DataTypes } from 'sequelize';
 
 export default {
   up: async (queryInterface: QueryInterface) => {
@@ -7,35 +7,35 @@ export default {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
       },
       firstName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.DATE
-      }
+        type: DataTypes.DATE,
+      },
     });
   },
   down: async (queryInterface: QueryInterface) => {
     await queryInterface.dropTable('Users');
-  }
+  },
 };
