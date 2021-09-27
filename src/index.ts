@@ -1,4 +1,4 @@
-import { serverConfig } from '../config';
+import { DEFAULT_LOCALE, serverConfig } from './config';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -20,6 +20,8 @@ const port = serverConfig.port;
 // Middleware to initialize request context
 app.use((req: Request, res: Response, next: NextFunction) => {
   req.context = new RequestContext(req);
+  req.locale =
+    (req.headers['Accept-Language'] as string) || (req.headers['accept-language'] as string) || DEFAULT_LOCALE;
   next();
 });
 
@@ -56,8 +58,9 @@ app.get('*', function (req: Request, res: Response) {
 
 // error handler middleware
 app.use(function (err: Error, req: Request, res: Response) {
+  const locale = (req.headers['Accept-Language'] as string) || DEFAULT_LOCALE;
   const response = new ResponseHandler(req, res);
-  return response.serverError(err.message, 'InternalServerError', err.stack);
+  return response.handleError(locale, err);
 });
 
 module.exports = server;

@@ -25,3 +25,5 @@ export const serverConfig: ServerConfig = {
   dbPassword: (env.DB_PASSWORD as string) || '',
   dbPort: env.DB_PORT ? parseInt(env.DB_PORT) : 3306,
 };
+
+export const DEFAULT_LOCALE = 'en';

@@ -1,4 +1,7 @@
+import { getMessage } from '@src/config/messages';
+import { INTERNAL_SERVER_ERROR } from '@src/config/messages/codes';
 import { Request, Response } from 'express';
+import { CustomErrorHandler } from './customErrorHandler';
 
 export default class ResponseHandler {
   private req: Request;
@@ -25,11 +28,7 @@ export default class ResponseHandler {
     return this.errorResponse(404, message, code);
   }
 
-  serverError(message: string, code: string, stack: any): Response {
-    return this.errorResponse(500, message, code, stack);
-  }
-
-  errorResponse<T>(status: number, message: string, code: string, stack?: any): Response {
+  errorResponse(status: number, message: string, code: string, stack?: any): Response {
     this.req.context.logEnd();
     const errorResponse = {
       message,
@@ -37,5 +36,17 @@ export default class ResponseHandler {
       stack,
     };
     return this.res.status(status).send(errorResponse);
+  }
+
+  handleError(locale: string, error: Error): Response {
+    if (error instanceof CustomErrorHandler) {
+      const { status, message, code } = error;
+      return this.errorResponse(status, message, code);
+    }
+    if (error instanceof Error) {
+      return this.errorResponse(500, error.message, INTERNAL_SERVER_ERROR, error.stack);
+    }
+    const message = getMessage(INTERNAL_SERVER_ERROR, locale);
+    return this.errorResponse(500, message, INTERNAL_SERVER_ERROR);
   }
 }
