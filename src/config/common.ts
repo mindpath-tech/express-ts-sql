@@ -9,7 +9,8 @@ export interface ServerConfig {
   dbUser: string;
   dbHost: string;
   dbDriver: string;
-  dbPassword: string
+  dbPassword: string;
+  dbPort: number;
 }
 
 /**
@@ -22,4 +23,7 @@ export const serverConfig: ServerConfig = {
   dbHost: (env.DB_HOST as string) || 'localhost',
   dbDriver: (env.DB_DRIVER as Dialect) || 'mysql',
   dbPassword: (env.DB_PASSWORD as string) || '',
+  dbPort: env.DB_PORT ? parseInt(env.DB_PORT) : 3306,
 };
+
+export const DEFAULT_LOCALE = 'en';

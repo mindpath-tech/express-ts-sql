@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelizeConnection } from '../../../config/database';
-
+import { sequelizeConnection } from '../../config/database';
 export interface IUserAttributes {
   id: number;
   firstName: string;

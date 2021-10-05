@@ -38,10 +38,10 @@
         "@mindpath/logger": "^0.0.2",
         "cors": "^2.8.5",
         "express": "^4.17.1",
-        "http-status-codes": "^2.1.4",
         "mysql2": "^2.3.0",
         "sequelize": "^6.6.5",
-        "tsconfig-paths": "^3.10.1"
+        "tsconfig-paths": "^3.10.1",
+        "uuid": "^8.3.2"
     },
     "devDependencies": {
         "@types/cors": "^2.8.12",
@@ -49,9 +49,10 @@
         "@types/jest": "^27.0.1",
         "@types/nock": "^11.1.0",
         "@types/node": "^16.6.1",
-        "@types/validator": "^13.6.3",
         "@types/sinon": "^10.0.2",
         "@types/supertest": "^2.0.11",
+        "@types/uuid": "^8.3.1",
+        "@types/validator": "^13.6.3",
         "@typescript-eslint/eslint-plugin": "^4.29.2",
         "@typescript-eslint/parser": "^4.29.2",
         "dotenv": "^10.0.0",
