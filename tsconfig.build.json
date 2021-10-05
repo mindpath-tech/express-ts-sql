@@ -6,7 +6,7 @@
         "declaration": true,
         "declarationMap": true,
         "sourceMap": true,
-        "outDir": "./dist",
+        "outDir": "./dist/src",
         "removeComments": true,
         "strict": true,
         "strictPropertyInitialization": false,

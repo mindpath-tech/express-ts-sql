@@ -85,9 +85,9 @@ const server = app.listen(port, () => {
 });
 
 swagger.serveSwagger(app, '/swagger', swaggerOptions, {
-  routePath: './dist/src/routes/v1',
-  requestModelPath: './dist/src/requestModels',
-  responseModelPath: './dist/src/responseModels',
+  routePath: '../../../dist/src/routes/v1',
+  requestModelPath: '../../../dist/src/requestModels',
+  responseModelPath: '../../../dist/src/responseModels',
 });
 
 app.get('*', function (req: Request, res: Response) {
