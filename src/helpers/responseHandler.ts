@@ -11,8 +11,13 @@ export default class ResponseHandler {
     this.res = res;
   }
 
-  successResponse<T>(data?: T): Response {
+  successResponse<T>(data?: T, headers?: Record<string, string>): Response {
     this.req.context.logEnd();
+    if (headers) {
+      Object.keys(headers).forEach((key) => {
+        this.res.set(key, headers[key]);
+      });
+    }
     return this.res.status(200).send(data);
   }
 
@@ -28,7 +33,7 @@ export default class ResponseHandler {
     return this.errorResponse(404, message, code);
   }
 
-  errorResponse(status: number, message: string, code: string, stack?: any): Response {
+  errorResponse(status: number, message: string, code: string, stack?: string): Response {
     this.req.context.logEnd();
     const errorResponse = {
       message,

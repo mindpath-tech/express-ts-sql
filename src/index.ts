@@ -1,14 +1,21 @@
-import { DEFAULT_LOCALE, serverConfig } from './config';
+import { DEFAULT_LOCALE, isProduction, serverConfig } from './config';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
 import RequestContext from './helpers/context';
 import ResponseHandler from './helpers/responseHandler';
+import helmet from 'helmet';
+import EmailService from './utils/email';
 
 const app = express();
 
+if (!isProduction) {
+  EmailService.loadTestAccount();
+}
+
 app.use(cors());
+app.use(helmet());
 
 // request payload middleware
 app.use(express.json());
