@@ -112,9 +112,10 @@ export default class AuthService {
   async changePassword(
     context: RequestContext,
     locale: string,
+    userId: number,
     changePasswordRequest: ChangePasswordRequest,
   ): Promise<IUserAttributes> {
-    const { oldPassword, newPassword, userId } = changePasswordRequest;
+    const { oldPassword, newPassword } = changePasswordRequest;
     const user = await this._userRepository.findUser({ id: userId }, ['password', 'id']);
     if (!user) {
       context.logError({

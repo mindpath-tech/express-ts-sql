@@ -12,13 +12,11 @@ export type SignInRequest = {
 };
 
 export type ChangePasswordRequest = {
-  userId: number;
   oldPassword: string;
   newPassword: string;
 };
 
 export type ResetPasswordRequest = {
-  userId: number;
   token: string;
   newPassword: string;
 };

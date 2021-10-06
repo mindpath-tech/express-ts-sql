@@ -29,12 +29,22 @@ export default class ResponseHandler {
     return this.errorResponse(403, message, code);
   }
 
+  unauthorizedError(message: string, code: string): Response {
+    return this.errorResponse(401, message, code);
+  }
+
   notFoundError(message: string, code: string): Response {
     return this.errorResponse(404, message, code);
   }
 
   errorResponse(status: number, message: string, code: string, stack?: string): Response {
-    this.req.context.logEnd();
+    const context = this.req.context;
+    context.logError({
+      action: 'error',
+      source: 'RequestContext#errorResponse',
+      message,
+    });
+    context.logEnd();
     const errorResponse = {
       message,
       code,
