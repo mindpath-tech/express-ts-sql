@@ -29,4 +29,5 @@ For documentation refer here https://www.npmjs.com/package/@mindpath/logger
 [Vikas Patidar](https://www.linkedin.com/in/vikas-patidar-0106/)
 
 [Ritik Jain](https://www.linkedin.com/in/ritik756/)
+
 [Krishan Kripal](https://www.linkedin.com/in/b2banna/)
