@@ -1,4 +1,3 @@
-import { Dialect } from 'sequelize/types';
 import { loadDotEnv } from './dotenv';
 const { env, isProduction, isTest } = loadDotEnv();
 export { isProduction, isTest };
@@ -21,17 +20,17 @@ export interface ServerConfig {
  * Derive all the environment variables from this property instead of using them directly.
  */
 export const serverConfig: ServerConfig = {
-  port: (env.PORT as string) || '3000',
-  dbName: (env.DB_NAME as string) || 'testing',
-  dbUser: (env.DB_USER as string) || 'root',
-  dbHost: (env.DB_HOST as string) || 'localhost',
-  dbDriver: (env.DB_DRIVER as Dialect) || 'mysql',
-  dbPassword: (env.DB_PASSWORD as string) || '',
-  dbPort: env.DB_PORT ? parseInt(env.DB_PORT) : 3306,
-  jwtSecretKey: (env.JWT_SECRET_KEY as string) || 'some_secret_key',
-  emailHost: (env.EMAIL_HOST as string) || 'smtp.ethereal.email',
-  emailUser: env.EMAIL_USER as string,
-  emailPass: env.EMAIL_PASS as string,
+  port: env.PORT,
+  dbName: env.DB_NAME,
+  dbUser: env.DB_USER,
+  dbHost: env.DB_HOST,
+  dbDriver: env.DB_DRIVER,
+  dbPassword: env.DB_PASSWORD,
+  dbPort: env.DB_PORT,
+  jwtSecretKey: env.JWT_SECRET_KEY,
+  emailHost: env.EMAIL_HOST,
+  emailUser: env.EMAIL_USER,
+  emailPass: env.EMAIL_PASS,
 };
 
 export const DEFAULT_LOCALE = 'en';
