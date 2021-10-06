@@ -10,7 +10,7 @@
         "prebuild": "rm -rf ./dist",
         "start": "NODE_ENV=production TS_NODE_PROJECT=./tsconfig.build.json node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/src/index",
         "start:debug": "NODE_ENV=development TS_NODE_PROJECT=./tsconfig.build.json TS_NODE_FILES=true node -r ts-node/register -r tsconfig-paths/register  --inspect=localhost:9229  src/index",
-        "start:dev": "NODE_ENV=development ./script/ts-node.sh src/index",
+        "start:dev": "NODE_ENV=development ./script/ts-node.sh dist/src/index",
         "test": "NODE_ENV=test DOTENV_CONFIG_PATH=$(pwd)/test/.env node --expose-gc --max-old-space-size=6044  node_modules/.bin/jest  --logHeapUsage  -i --detectOpenHandles --forceExit --config jest.config.js",
         "test:build": "yarn run prebuild  &&  tsc --build ./tsconfig.spec.json",
         "test:debug": "NODE_ENV=test DOTENV_CONFIG_PATH=$(pwd)/test/.env   node --inspect=localhost:9229 --inspect-brk  node_modules/.bin/jest --colors --no-coverage  --ci -i --detectOpenHandles --forceExit --config jest.config.js",
