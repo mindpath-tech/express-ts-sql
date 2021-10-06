@@ -1,12 +1,6 @@
 import AuthService from '@service/auth';
 import ResponseHandler from '@src/helpers/responseHandler';
-import {
-  ChangePasswordRequest,
-  ForgotPasswordRequest,
-  ResetPasswordRequest,
-  SignInRequest,
-  SignUpRequest,
-} from '@src/types/auth';
+import { ForgotPasswordRequest, ResetPasswordRequest, SignInRequest, SignUpRequest } from '@src/types/auth';
 import { generateJWT } from '@src/utils/jwt';
 import { Request, Response } from 'express';
 
@@ -79,10 +73,11 @@ export default class AuthController {
   async changePassword(req: Request, res: Response): Promise<Response> {
     const _authService = new AuthService();
     const responseHandler = new ResponseHandler(req, res);
-    const body = req.body as ChangePasswordRequest;
+    const changePasswordRequest = req.body;
+    const userId = req.app.locals.id;
     const { context, locale } = req;
     try {
-      await _authService.changePassword(context, locale, body);
+      await _authService.changePassword(context, locale, userId, changePasswordRequest);
       return responseHandler.successResponse();
     } catch (error) {
       return responseHandler.handleError(locale, error as Error);
