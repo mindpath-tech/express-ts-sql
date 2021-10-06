@@ -1,6 +1,5 @@
 'use-strict';
 
-import { checkToken } from '@src/middlewares/checkToken';
 import express from 'express';
 import AuthController from '../../controllers/v1/auth';
 import swagger from "../../privateLibs/swagger-generator-express";
