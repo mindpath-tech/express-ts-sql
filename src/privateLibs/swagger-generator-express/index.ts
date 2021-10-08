@@ -15,11 +15,11 @@ import expressValidation from './validation/validate';
  * generate swagger documentation with joi validation.
  */
 
-export default {
+export {
     swaggerize,
     createModel,
     serveSwagger,
-    validation: expressValidation,
+    expressValidation as validation,
 };
 
 /**
@@ -280,7 +280,7 @@ function describeSwagger(routePath: string, requestModelPath: string, responseMo
                 console.log('No router file found in given folder');
                 return;
             }
-            if (file.includes('.js') && !file.includes('.js.')) {
+            if (!file.includes('.js.') && !file.includes('.ts.') && !file.includes('.d.ts'))  {
                 let responseModel;
                 let requestModel;
                 const route = join(rootPath, routePath, file);

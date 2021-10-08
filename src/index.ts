@@ -1,7 +1,7 @@
 import { DEFAULT_LOCALE, isProduction, serverConfig } from './config';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import swagger from '../src/privateLibs/swagger-generator-express';
+import { serveSwagger } from '../src/privateLibs/swagger-generator-express';
 import path from 'path';
 import fs from 'fs';
 import RequestContext from './helpers/context';
@@ -40,6 +40,7 @@ const swaggerOptions = {
   parameters: {
     timezone: {
       description: 'Asia/Calcutta',
+      locale: 'en',
       type: 'string',
       name: 'timezone',
       in: 'header',
@@ -91,10 +92,10 @@ const server = app.listen(port, () => {
   console.info(`Started on port : ${port}`);
 });
 
-swagger.serveSwagger(app, '/swagger', swaggerOptions, {
-  routePath: 'dist/src/routes/v1',
-  requestModelPath: 'dist/src/requestModels',
-  responseModelPath: 'dist/src/responseModels',
+serveSwagger(app, '/swagger', swaggerOptions, {
+  routePath: '../../routes/v1',
+  requestModelPath: '../../requestModels',
+  responseModelPath: '../../responseModels',
 });
 
 app.get('*', function (req: Request, res: Response) {

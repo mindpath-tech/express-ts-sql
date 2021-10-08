@@ -32,7 +32,6 @@ export = {
   },
   3: {
     body: {
-      userId: Joi.number().required(),
       token: Joi.string().required(),
       newPassword: Joi.string().required(),
     },
@@ -42,7 +41,6 @@ export = {
   },
   4: {
     body: {
-      userId: Joi.number().required(),
       oldPassword: Joi.string().required(),
       newPassword: Joi.string().required(),
     },
