@@ -136,7 +136,7 @@ export default class AuthService {
         source: 'AuthService#changePassword',
       });
       const message = getMessage(INVALID_PASSWORD, locale);
-      throw new CustomErrorHandler(404, message, INVALID_PASSWORD);
+      throw new CustomErrorHandler(401, message, INVALID_PASSWORD);
     }
 
     user.password = newPassword;
