@@ -9,7 +9,8 @@ export interface ServerConfig {
   dbUser: string;
   dbHost: string;
   dbDriver: string;
-  dbPassword: string
+  dbPassword: string;
+  axiosRequestTimeout:number;
 }
 
 /**
@@ -22,4 +23,5 @@ export const serverConfig: ServerConfig = {
   dbHost: (env.DB_HOST as string) || 'localhost',
   dbDriver: (env.DB_DRIVER as Dialect) || 'mysql',
   dbPassword: (env.DB_PASSWORD as string) || '',
+  axiosRequestTimeout: env.AXIOS_REQUEST_TIMEOUT ? parseInt(env.AXIOS_REQUEST_TIMEOUT) : 30000
 };
