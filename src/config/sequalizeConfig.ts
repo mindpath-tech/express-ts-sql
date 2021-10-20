@@ -5,7 +5,7 @@ module.exports = {
     database: 'testing',
     host: 'localhost',
     port: 3306,
-    dialect: 'mysql'
+    dialect: 'mysql',
   },
   production: {
     username: process.env.DB_USER,
@@ -13,14 +13,14 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    dialect: process.env.DB_DRIVER
+    dialect: process.env.DB_DRIVER,
   },
   development: {
     username: 'root',
-    password: '',
-    database: 'testing',
+    password: 'root',
+    database: 'express-ts-sql',
     host: 'localhost',
     port: 3306,
-    dialect: 'mysql'
-  }
+    dialect: 'mysql',
+  },
 };
