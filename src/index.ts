@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 const swaggerOptions = {
   title: 'express-ts-sql',
   version: '1.0.0',
-  host: 'localhost',
+  host: 'localhost:3000',
   basePath: '/',
   schemes: ['https', 'http'],
   securityDefinitions: {
@@ -98,13 +98,13 @@ serveSwagger(app, '/swagger', swaggerOptions, {
   responseModelPath: '../../responseModels',
 });
 
-app.get('*', function (req: Request, res: Response) {
+app.get('*', function (req: Request, res: Response, next: NextFunction) {
   const response = new ResponseHandler(req, res);
   return response.notFoundError('APIs route not found', 'RequestNotFound');
 });
 
 // error handler middleware
-app.use(function (err: Error, req: Request, res: Response) {
+app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
   const locale = (req.headers['Accept-Language'] as string) || DEFAULT_LOCALE;
   const response = new ResponseHandler(req, res);
   return response.handleError(locale, err);

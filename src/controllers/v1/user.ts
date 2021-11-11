@@ -22,7 +22,7 @@ export default class UserController {
   async getUser(req: Request, res: Response): Promise<Response> {
     const _userService = new UserService();
     const responseHandler = new ResponseHandler(req, res);
-    const userId = req.app.locals.id;
+    const userId = req.app.locals.userId;
     try {
       const response = await _userService.getUser(userId);
       return responseHandler.successResponse(response);
@@ -34,7 +34,7 @@ export default class UserController {
   async updateUser(req: Request, res: Response): Promise<Response> {
     const _userService = new UserService();
     const responseHandler = new ResponseHandler(req, res);
-    const userId = req.app.locals.id;
+    const userId = req.app.locals.userId;
     const updateUserRequest = req.body;
     try {
       const response = await _userService.updateUser(userId, updateUserRequest);
@@ -47,7 +47,7 @@ export default class UserController {
   async deleteUser(req: Request, res: Response): Promise<Response> {
     const _userService = new UserService();
     const responseHandler = new ResponseHandler(req, res);
-    const userId = req.app.locals.id;
+    const userId = req.app.locals.userId;
     try {
       const response = await _userService.deleteUser(userId);
       return responseHandler.successResponse(response);
