@@ -100,6 +100,7 @@ export default class AuthService {
       throw new CustomErrorHandler(404, message, USER_NOT_FOUND);
     }
     const token = randomBytes(6).toString('hex');
+    user.token = token;
     const emailInfo = {
       to: email,
       subject: 'Reset Password',

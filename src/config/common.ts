@@ -34,4 +34,5 @@ export const serverConfig: ServerConfig = {
   emailPass: env.EMAIL_PASS as string,
 };
 
+export const SUPPORTED_LOCALE = ["en", 'hi'];
 export const DEFAULT_LOCALE = 'en';
