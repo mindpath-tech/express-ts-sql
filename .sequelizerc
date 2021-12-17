@@ -1,0 +1,7 @@
+const path = require('path');
+
+module.exports = {
+  'config': path.resolve('src', 'config', 'sequalizeConfig.ts'),
+  'migrations-path': path.resolve('dist', 'src', 'database', 'migrations'),
+  'seeders-path': path.resolve('dist', 'src', 'database', 'seeds'),
+};
