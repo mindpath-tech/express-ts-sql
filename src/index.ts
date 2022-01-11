@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, isProduction, serverConfig } from './config';
+import { DEFAULT_LOCALE, isProduction, serverConfig, SUPPORTED_LOCALE } from './config';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { serveSwagger } from '../src/privateLibs/swagger-generator-express';
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 const swaggerOptions = {
   title: 'express-ts-sql',
   version: '1.0.0',
-  host: 'localhost',
+  host: 'localhost:3000',
   basePath: '/',
   schemes: ['https', 'http'],
   securityDefinitions: {
@@ -61,8 +61,9 @@ const port = serverConfig.port;
 // Middleware to initialize request context
 app.use((req: Request, res: Response, next: NextFunction) => {
   req.context = new RequestContext(req);
-  req.locale =
-    (req.headers['Accept-Language'] as string) || (req.headers['accept-language'] as string) || DEFAULT_LOCALE;
+  let locale = (req.headers['Accept-Language'] as string) || (req.headers['accept-language'] as string) || DEFAULT_LOCALE;
+  locale = SUPPORTED_LOCALE.includes(locale) ? locale : DEFAULT_LOCALE;
+  req.locale = locale;
   next();
 });
 
@@ -98,14 +99,15 @@ serveSwagger(app, '/swagger', swaggerOptions, {
   responseModelPath: '../../responseModels',
 });
 
-app.get('*', function (req: Request, res: Response) {
+app.get('*', function (req: Request, res: Response, next: NextFunction) {
   const response = new ResponseHandler(req, res);
   return response.notFoundError('APIs route not found', 'RequestNotFound');
 });
 
 // error handler middleware
-app.use(function (err: Error, req: Request, res: Response) {
-  const locale = (req.headers['Accept-Language'] as string) || DEFAULT_LOCALE;
+app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
+  let locale = (req.headers['Accept-Language'] as string) || DEFAULT_LOCALE;
+  locale = SUPPORTED_LOCALE.includes(locale) ? locale : DEFAULT_LOCALE;
   const response = new ResponseHandler(req, res);
   return response.handleError(locale, err);
 });

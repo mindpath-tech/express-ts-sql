@@ -74,7 +74,7 @@ export default class AuthController {
     const _authService = new AuthService();
     const responseHandler = new ResponseHandler(req, res);
     const changePasswordRequest = req.body;
-    const userId = req.app.locals.id;
+    const userId = req.app.locals.userId;
     const { context, locale } = req;
     try {
       await _authService.changePassword(context, locale, userId, changePasswordRequest);
