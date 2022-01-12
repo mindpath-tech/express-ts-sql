@@ -47,7 +47,7 @@ export default class UserController {
   async deleteUser(req: Request, res: Response): Promise<Response> {
     const _userService = new UserService();
     const responseHandler = new ResponseHandler(req, res);
-    const userId = req.app.locals.userId;
+    const userId = parseInt(req.params.userId);
     try {
       const response = await _userService.deleteUser(userId);
       return responseHandler.successResponse(response);
