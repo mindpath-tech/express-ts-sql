@@ -11,6 +11,7 @@ export interface ServerConfig {
   dbDriver: string;
   dbPassword: string;
   dbPort: number;
+  axiosRequestTimeout: number;
   jwtSecretKey: string;
   emailHost: string;
   emailUser: string;
@@ -28,6 +29,7 @@ export const serverConfig: ServerConfig = {
   dbDriver: (env.DB_DRIVER as Dialect) || 'mysql',
   dbPassword: (env.DB_PASSWORD as string) || '',
   dbPort: env.DB_PORT ? parseInt(env.DB_PORT) : 3306,
+  axiosRequestTimeout: env.AXIOS_REQUEST_TIMEOUT ? parseInt(env.AXIOS_REQUEST_TIMEOUT) : 30000,
   jwtSecretKey: (env.JWT_SECRET_KEY as string) || 'some_secret_key',
   emailHost: (env.EMAIL_HOST as string) || 'smtp.ethereal.email',
   emailUser: env.EMAIL_USER as string,
