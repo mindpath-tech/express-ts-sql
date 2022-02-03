@@ -26,6 +26,9 @@ export = {
     description: 'Get a user details',
   },
   3: {
+    params: {
+      userId: Joi.number(),
+    },
     model: 'DeleteUser',
     group: 'User',
     description: 'Delete a user',
